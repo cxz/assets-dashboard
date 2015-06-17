@@ -1,0 +1,37 @@
+Beacons<br>
+
+<div class="beacons-status"></div>
+
+<div class="beacons">
+  <table class="table table-hover table-condensed table-striped">
+    <thead>
+        <tr>
+          <th colspan="6">
+            Beacons
+          </th>
+        </tr>
+        <tr>
+          <td>uuid</td>
+          <td>sensor</td>
+          <td>power</td>
+          <td>rssi</td>
+          <td>major</td>
+          <td>minor</td>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+</div>
+
+<script id="beacon-template" type="text/html">
+  <tr class="beacon-<%%= uuid %>">
+    <td><%%= uuid %></td>
+    <td><%%= sensor %></td>
+    <td><%%= rssi %></td>
+    <td><%%= power %></td>
+    <td><%%= major %></td>
+    <td><%%= minor %></td>
+  </tr>
+</script>
