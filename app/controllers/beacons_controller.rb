@@ -6,8 +6,8 @@ class BeaconsController < ApplicationController
     sse = SSE.new(response.stream, retry: 300)
     begin
 
-      BeaconMonitor.new.on_change do |beacons, event|
-        sse.write(beacons, event: event)
+      BeaconMonitor.new.on_change do |beacon, event|
+        sse.write(beacon, event: event)
       end
 
     rescue ActionController::Live::ClientDisconnected

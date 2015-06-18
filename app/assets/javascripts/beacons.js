@@ -10,16 +10,22 @@ var onReady = function() {
 
     var beaconTemplate = _.template($('#beacon-template').html());
 
-    source.addEventListener('change', function(event) {
-        beacons = JSON.parse(event.data);
+    source.addEventListener('added', function(event) {
+        beacon = JSON.parse(event.data);
+        $('.beacons tbody').append(beaconTemplate(beacon));
+        highlight(beacon);
+    });
 
-        var result = "";
-        _.each(beacons, function(beacon) {
-            result += beaconTemplate(beacon);
-        });
+    source.addEventListener('updated', function(event) {
+        beacon = JSON.parse(event.data);
+        $('.beacon-' + beacon.id).replaceWith(beaconTemplate(beacon));
+        highlight(beacon);
+    });
 
-        $('.beacons tbody').html(result);
-
+    source.addEventListener('removed', function(event) {
+        beacon = JSON.parse(event.data);
+        highlight(beacon);
+        $('.beacon-' + beacon.id).remove();
     });
 
     source.onopen = function(event) {
@@ -44,6 +50,10 @@ var onReady = function() {
                 break;
         }
     };
+
+    function highlight(beacon) {
+        $('.beacon-' + beacon.id).animate({ backgroundColor: "yellow" }, "fast").animate({backgroundColor: 'white'}, 'fast');
+    }
 
 };
 
